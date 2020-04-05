@@ -46,10 +46,10 @@ function inicializaCronometro() {
 }
 
 function finalizaJogo() {
-    campo.attr("disabled", true);
-    $("#botao-reiniciar").attr("disabled", false);
-    campo.toggleClass("campo-desativado");
-    inserePlacar();
+  campo.attr("disabled", true);
+  $("#botao-reiniciar").attr("disabled", false);
+  campo.toggleClass("campo-desativado");
+  inserePlacar();
 }
 function validaTexto() {
   var texto = $(".frase").text();
@@ -65,19 +65,6 @@ function validaTexto() {
       campo.removeClass("campo-correto");
     }
   });
-}
-
-function inserePlacar() {
-    var corpoTabela = $(".placar").find("tbody");
-    var usuario = "Renato";
-    var numeroPalavras = $("#contador-palavras").text();
-
-    var linha = "<tr>" +
-                    "<td>" + usuario + "</td>" +
-                    "<td>" + numeroPalavras + "</td>" +
-                "</tr>";
-
-    corpoTabela.append(linha);
 }
 
 function reiniciaJogo() {
