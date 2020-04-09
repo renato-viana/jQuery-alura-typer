@@ -33,3 +33,12 @@
 .body {
     overflow: scroll;
 }
+
+#erro {
+    display: none;
+    color: #FF0000;
+}
+
+#spinner {
+    display: none;
+}
