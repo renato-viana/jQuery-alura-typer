@@ -1,4 +1,5 @@
 $("#botao-placar").click(mostraPlacar);
+$("#botao-sync").click(sincronizaPlacar);
     
 function inserePlacar() {
   var corpoTabela = $(".placar").find("tbody");
@@ -56,4 +57,44 @@ function removeLinha() {
 
 function mostraPlacar() {
     $(".placar").stop().slideToggle(1000);
+}
+
+function sincronizaPlacar() {
+
+    var placar = [];
+    var linhas = $("tbody>tr");
+
+    linhas.each(function() {
+      var usuario = $(this).find("td:nth-child(1)").text();
+      var palavras = $(this).find("td:nth-child(2)").text();
+      
+      var score = {
+        usuario: usuario,
+        pontos: palavras
+      };
+
+      placar.push(score);
+    });
+
+    var dados = {
+      placar: placar
+    };
+   
+    //Envio de dados objeto ou String.
+  $.post("http://localhost:3000/placar", dados, function() {
+    console.log("Placar salvo no servidor com sucesso!");
+  });
+}
+
+function atualizaPlacar() {
+
+  $.get("http://localhost:3000/placar", function(data) {
+
+    $(data).each(function() {
+      var linha = novaLinha(this.usuario, this.pontos);
+      linha.find(".botao-remover").click(removeLinha);
+      $("tbody").append(linha);
+    });
+   
+  });
 }
