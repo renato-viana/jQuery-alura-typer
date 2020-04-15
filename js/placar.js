@@ -81,8 +81,18 @@ function sincronizaPlacar() {
     };
    
     //Envio de dados objeto ou String.
-  $.post("http://localhost:3000/placar", dados, function() {
+  $.post("http://localhost:30002/placar", dados, function() {
     console.log("Placar salvo no servidor com sucesso!");
+    $(".tooltip").tooltipster("open").tooltipster("content", "Sucesso ao sincronizar!");
+  }).fail(function() {
+    $(".tooltip").tooltipster("open").tooltipster("content", "Falha ao sincronizar!");
+  })
+  
+  .always(function() {
+    setTimeout(function() {
+      $(".tooltip").tooltipster("close");
+    }, 1200);
+    
   });
 }
 
